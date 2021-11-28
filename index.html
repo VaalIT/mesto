@@ -1,0 +1,91 @@
+
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+  <meta charset="UTF-8">
+  <link rel="stylesheet" href="pages/index.css">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Mesto</title>
+</head>
+<body class="page">
+  <header class="header">
+    <img class="header__logo" src="images/header/header-logo.svg" alt="Логотип Mesto Russia.">
+  </header>
+  <main class="content">
+    <section class="popup">
+      <div class="popup__window">
+        <div class="popup__container">
+          <button class="popup__close-button"></button>
+          <h2 class="popup__title">Редактировать профиль</h2>
+          <input class="popup__name-input" type="text" value="Жак-Ив Кусто">
+          <input class="popup__job-input" type="text" value="Исследователь океана">
+          <button class="popup__save-button">Сохранить</button>
+        </div>
+      </div>
+    </section>
+    <section class="profile">
+      <div class="profile__item">
+        <img class="profile__avatar" src="images/profile/profile-avatar.jpg" alt="Фото Жак-Ив Кусто.">
+        <div class="profile__description">
+          <div class="profile__heading">
+            <h1 class="profile__name">Жак-Ив Кусто</h1>
+            <button class="profile__edit-button"></button>
+          </div>
+        <p class="profile__job">Исследователь океана</p>
+        </div>
+      </div>
+      <button class="photo__add-button"></button>
+    </section>
+    <section class="photo">
+      <div class="photo-grid">
+        <figure class="photo-grid__item">
+          <img class="photo-grid__photo" src="images/photo-grid/photo-grid-ocean-1.jpg" alt="Океан 1.">
+          <figcaption class="photo-grid__caption">
+            <h2 class="photo-grid__title">Океан 1</h2>
+            <button class="photo-grid__like-button"></button>
+          </figcaption>
+        </figure>
+        <figure class="photo-grid__item">
+          <img class="photo-grid__photo" src="images/photo-grid/photo-grid-ocean-2.jpg" alt="Океан 2.">
+          <figcaption class="photo-grid__caption">
+            <h2 class="photo-grid__title">Океан 2</h2>
+            <button class="photo-grid__like-button"></button>
+          </figcaption>
+        </figure>
+        <figure class="photo-grid__item">
+          <img class="photo-grid__photo" src="images/photo-grid/photo-grid-ocean-3.jpg" alt="Океан 3.">
+          <figcaption class="photo-grid__caption">
+            <h2 class="photo-grid__title">Океан 3</h2>
+            <button class="photo-grid__like-button"></button>
+          </figcaption>
+        </figure>
+        <figure class="photo-grid__item">
+          <img class="photo-grid__photo" src="images/photo-grid/photo-grid-ocean-4.jpg" alt="Океан 4.">
+          <figcaption class="photo-grid__caption">
+            <h2 class="photo-grid__title">Океан 4</h2>
+            <button class="photo-grid__like-button"></button>
+          </figcaption>
+        </figure>
+        <figure class="photo-grid__item">
+          <img class="photo-grid__photo" src="images/photo-grid/photo-grid-ocean-5.jpg" alt="Океан 5.">
+          <figcaption class="photo-grid__caption">
+            <h2 class="photo-grid__title">Океан 5</h2>
+            <button class="photo-grid__like-button"></button>
+          </figcaption>
+        </figure>
+        <figure class="photo-grid__item">
+          <img class="photo-grid__photo" src="images/photo-grid/photo-grid-ocean-6.jpg" alt="Океан 6.">
+          <figcaption class="photo-grid__caption">
+            <h2 class="photo-grid__title">Океан 6</h2>
+            <button class="photo-grid__like-button"></button>
+          </figcaption>
+        </figure>
+      </div>
+    </section>
+  </main>
+  <footer class="footer">
+    <p>&#169; 2021 Mesto Russia</p>
+  </footer>
+<script src="script.js"></script>
+</body>
+</html>

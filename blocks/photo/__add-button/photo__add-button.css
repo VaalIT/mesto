@@ -1,0 +1,19 @@
+.photo__add-button {
+    margin: 0 auto;
+    background: #000000 url(../../../images/photo/photo-add-button.svg) center no-repeat;
+    width: 282px;
+    height: 50px;
+    border: 2px solid white;
+}
+
+.photo__add-button:hover {
+    opacity: 60%;
+    cursor: pointer;
+}
+
+@media screen and (min-width: 1280px) {
+    .photo__add-button {
+        margin: 0;
+        width: 150px;
+    }
+}
