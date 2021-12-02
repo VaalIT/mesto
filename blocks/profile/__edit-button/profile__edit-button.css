@@ -3,7 +3,9 @@
     width: 18px;
     height: 18px;
     border: 0;
-    margin-left: 10px;
+    position: absolute;
+    top: 8px;
+    left: 199px;
 }
 
 .profile__edit-button:hover {
@@ -16,6 +18,7 @@
         background-size: contain;
         width: 24px;
         height: 24px;
-        margin-left: 18px;
+        top: 15px;
+        left: 312px;
     }
 }

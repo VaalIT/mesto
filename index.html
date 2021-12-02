@@ -12,80 +12,78 @@
     <img class="header__logo" src="images/header/header-logo.svg" alt="Логотип Mesto Russia.">
   </header>
   <main class="content">
-    <section class="popup">
-      <div class="popup__window">
-        <div class="popup__container">
-          <button class="popup__close-button"></button>
-          <h2 class="popup__title">Редактировать профиль</h2>
-          <input class="popup__name-input" type="text" value="Жак-Ив Кусто">
-          <input class="popup__job-input" type="text" value="Исследователь океана">
-          <button class="popup__save-button">Сохранить</button>
-        </div>
-      </div>
-    </section>
     <section class="profile">
       <div class="profile__item">
         <img class="profile__avatar" src="images/profile/profile-avatar.jpg" alt="Фото Жак-Ив Кусто.">
         <div class="profile__description">
           <div class="profile__heading">
             <h1 class="profile__name">Жак-Ив Кусто</h1>
-            <button class="profile__edit-button"></button>
+            <button class="profile__edit-button" type="button"></button>
           </div>
         <p class="profile__job">Исследователь океана</p>
         </div>
       </div>
-      <button class="profile__photo-add-button"></button>
+      <button class="profile__photo-add-button" type="button"></button>
     </section>
     <section class="photo">
-      <div class="photo-grid">
-        <figure class="photo-grid__item">
-          <img class="photo-grid__photo" src="images/photo-grid/photo-grid-ocean-1.jpg" alt="Океан 1.">
-          <figcaption class="photo-grid__caption">
-            <h2 class="photo-grid__title">Океан 1</h2>
-            <button class="photo-grid__like-button"></button>
-          </figcaption>
-        </figure>
-        <figure class="photo-grid__item">
-          <img class="photo-grid__photo" src="images/photo-grid/photo-grid-ocean-2.jpg" alt="Океан 2.">
-          <figcaption class="photo-grid__caption">
-            <h2 class="photo-grid__title">Океан 2</h2>
-            <button class="photo-grid__like-button"></button>
-          </figcaption>
-        </figure>
-        <figure class="photo-grid__item">
-          <img class="photo-grid__photo" src="images/photo-grid/photo-grid-ocean-3.jpg" alt="Океан 3.">
-          <figcaption class="photo-grid__caption">
-            <h2 class="photo-grid__title">Океан 3</h2>
-            <button class="photo-grid__like-button"></button>
-          </figcaption>
-        </figure>
-        <figure class="photo-grid__item">
-          <img class="photo-grid__photo" src="images/photo-grid/photo-grid-ocean-4.jpg" alt="Океан 4.">
-          <figcaption class="photo-grid__caption">
-            <h2 class="photo-grid__title">Океан 4</h2>
-            <button class="photo-grid__like-button"></button>
-          </figcaption>
-        </figure>
-        <figure class="photo-grid__item">
-          <img class="photo-grid__photo" src="images/photo-grid/photo-grid-ocean-5.jpg" alt="Океан 5.">
-          <figcaption class="photo-grid__caption">
-            <h2 class="photo-grid__title">Океан 5</h2>
-            <button class="photo-grid__like-button"></button>
-          </figcaption>
-        </figure>
-        <figure class="photo-grid__item">
-          <img class="photo-grid__photo" src="images/photo-grid/photo-grid-ocean-6.jpg" alt="Океан 6.">
-          <figcaption class="photo-grid__caption">
-            <h2 class="photo-grid__title">Океан 6</h2>
-            <button class="photo-grid__like-button"></button>
-          </figcaption>
-        </figure>
+      <div class="photo__item">
+        <img class="photo__image" src="images/photo/photo-ocean-1.jpg" alt="Океан 1.">
+        <div class="photo__caption">
+          <h2 class="photo__title">Океан 1</h2>
+          <button class="photo__like-button" type="button"></button>
+        </div>
+      </div>
+      <div class="photo__item">
+        <img class="photo__image" src="images/photo/photo-ocean-2.jpg" alt="Океан 2.">
+        <div class="photo__caption">
+          <h2 class="photo__title">Океан 2</h2>
+          <button class="photo__like-button" type="button"></button>
+        </div>
+      </div>
+      <div class="photo__item">
+        <img class="photo__image" src="images/photo/photo-ocean-3.jpg" alt="Океан 3.">
+        <div class="photo__caption">
+          <h2 class="photo__title">Океан 3</h2>
+          <button class="photo__like-button" type="button"></button>
+        </div>
+      </div>
+      <div class="photo__item">
+        <img class="photo__image" src="images/photo/photo-ocean-4.jpg" alt="Океан 4.">
+        <div class="photo__caption">
+          <h2 class="photo__title">Океан 4</h2>
+          <button class="photo__like-button" type="button"></button>
+        </div>
+      </div>
+      <div class="photo__item">
+        <img class="photo__image" src="images/photo/photo-ocean-5.jpg" alt="Океан 5.">
+        <div class="photo__caption">
+          <h2 class="photo__title">Океан 5</h2>
+          <button class="photo__like-button" type="button"></button>
+        </div>
+      </div>
+      <div class="photo__item">
+        <img class="photo__image" src="images/photo/photo-ocean-6.jpg" alt="Океан 6.">
+        <div class="photo__caption">
+          <h2 class="photo__title">Океан 6</h2>
+          <button class="photo__like-button" type="button"></button>
+        </div>
       </div>
     </section>
   </main>
   <footer class="footer">
-    <p>&#169; 2021 Mesto Russia</p>
+    <p class="footer__text">&#169; 2021 Mesto Russia</p>
   </footer>
-<script src="script.js"></script>
+<section class="popup">
+  <div class="popup__container">
+    <button class="popup__close-button" type="button"></button>
+    <h2 class="popup__title">Редактировать профиль</h2>
+    <form class="popup__form">
+      <input class="popup__input popup__input_type_name" name="name" type="text" value="Жак-Ив Кусто">
+      <input class="popup__input popup__input_type_job" name="job" type="text" value="Исследователь океана">
+      <button class="popup__save-button" type="submit">Сохранить</button>
+    </form>
+  </div>
+</section>
+<script src="scripts/script.js"></script>
 </body>
 </html>

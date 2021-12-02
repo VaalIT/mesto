@@ -1,6 +1,7 @@
 .profile__photo-add-button {
     margin: 0 auto;
-    background: #000000 url(../../../images/photo/photo-add-button.svg) center no-repeat;
+    background: #000000 url(../../../images/profile/profile-photo-add-button.svg) center no-repeat;
+    background-size: 16px 16px;
     width: 282px;
     height: 50px;
     border: 2px solid white;
@@ -14,6 +15,7 @@
 @media screen and (min-width: 1280px) {
     .profile__photo-add-button {
         margin: 0;
+        background-size: 22px 22px;
         width: 150px;
     }
 }
