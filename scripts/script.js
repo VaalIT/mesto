@@ -16,8 +16,7 @@ function popupOpen() {
     popup.classList.add('popup_opened');
     profileName.textContent = nameInput.value; 
     profileJob.textContent = jobInput.value;
-    popupSaveButton.addEventListener('click', popupClose);
-} 
+}
 
 editButton.addEventListener('click', popupOpen);
 

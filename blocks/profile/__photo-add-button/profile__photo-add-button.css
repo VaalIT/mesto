@@ -12,7 +12,7 @@
     cursor: pointer;
 }
 
-@media screen and (min-width: 1280px) {
+@media screen and (min-width: 1024px) {
     .profile__photo-add-button {
         margin: 0;
         background-size: 22px 22px;
