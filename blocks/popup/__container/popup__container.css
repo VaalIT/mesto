@@ -1,4 +1,5 @@
 .popup__container {
+    margin-top: -55px;
     position: relative;
     width: 282px;
     min-height: 322px;
@@ -11,6 +12,7 @@
 
 @media screen and (min-width: 1024px) {
     .popup__container {
+        margin-top: 10px;
         width: 430px;
         min-height: 330px;
     }
