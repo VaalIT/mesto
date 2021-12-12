@@ -26,61 +26,49 @@
       <button class="profile__photo-add-button" type="button"></button>
     </section>
     <section class="photo">
-      <div class="photo__item">
-        <img class="photo__image" src="images/photo/photo-ocean-1.jpg" alt="Океан 1.">
-        <div class="photo__caption">
-          <h2 class="photo__title">Океан 1</h2>
-          <button class="photo__like-button" type="button"></button>
+      <template class="template">
+        <div class="photo__item">
+          <button class="photo__delete-button" type="button"></button>
+          <img class="photo__image" src=" " alt=" ">
+          <div class="photo__caption">
+            <h2 class="photo__title"> </h2>
+            <button class="photo__like-button" type="button"></button>
+          </div>
         </div>
-      </div>
-      <div class="photo__item">
-        <img class="photo__image" src="images/photo/photo-ocean-2.jpg" alt="Океан 2.">
-        <div class="photo__caption">
-          <h2 class="photo__title">Океан 2</h2>
-          <button class="photo__like-button" type="button"></button>
-        </div>
-      </div>
-      <div class="photo__item">
-        <img class="photo__image" src="images/photo/photo-ocean-3.jpg" alt="Океан 3.">
-        <div class="photo__caption">
-          <h2 class="photo__title">Океан 3</h2>
-          <button class="photo__like-button" type="button"></button>
-        </div>
-      </div>
-      <div class="photo__item">
-        <img class="photo__image" src="images/photo/photo-ocean-4.jpg" alt="Океан 4.">
-        <div class="photo__caption">
-          <h2 class="photo__title">Океан 4</h2>
-          <button class="photo__like-button" type="button"></button>
-        </div>
-      </div>
-      <div class="photo__item">
-        <img class="photo__image" src="images/photo/photo-ocean-5.jpg" alt="Океан 5.">
-        <div class="photo__caption">
-          <h2 class="photo__title">Океан 5</h2>
-          <button class="photo__like-button" type="button"></button>
-        </div>
-      </div>
-      <div class="photo__item">
-        <img class="photo__image" src="images/photo/photo-ocean-6.jpg" alt="Океан 6.">
-        <div class="photo__caption">
-          <h2 class="photo__title">Океан 6</h2>
-          <button class="photo__like-button" type="button"></button>
-        </div>
-      </div>
+      </template>
     </section>
   </main>
   <footer class="footer">
     <p class="footer__text">&#169; 2021 Mesto Russia</p>
   </footer>
-  <section class="popup">
+  <section class="popup popup_type_profile">
     <div class="popup__container">
-      <button class="popup__close-button" type="button"></button>
+      <button class="popup__close-button" name="close-profile" type="button"></button>
       <h2 class="popup__title">Редактировать профиль</h2>
       <form class="popup__form" name="profile">
-        <input class="popup__input popup__input_type_name" name="name" type="text" value="Жак-Ив Кусто">
-        <input class="popup__input popup__input_type_job" name="job" type="text" value="Исследователь океана">
-        <button class="popup__save-button" type="submit">Сохранить</button>
+        <input class="popup__input popup__input_type_name" name="input-name" type="text" value="Жак-Ив Кусто">
+        <input class="popup__input popup__input_type_job" name="input-job" type="text" value="Исследователь океана">
+        <button class="popup__save-button"name="save-profile" type="submit">Сохранить</button>
+      </form>
+    </div>
+  </section>
+  <section class="popup popup_type_photo">
+    <div class="popup__container">
+      <button class="popup__close-button" name="close-photo" type="button"></button>
+      <h2 class="popup__title">Новое место</h2>
+      <form class="popup__form" name="photo">
+        <input class="popup__input popup__input_type_title" name="input-title" type="text" placeholder="Название">
+        <input class="popup__input popup__input_type_link" name="input-link" type="text" placeholder="Ссылка на картинку">
+        <button class="popup__save-button" name="save-photo" type="submit">Создать</button>
+      </form>
+    </div>
+  </section>
+  <section class="popup popup_type_view">
+    <div class="popup__container-view">
+      <button class="popup__close-button" name="close-view" type="button"></button>
+      <form class="popup__form-view" name="view">
+        <img class="popup__view-photo" src=" " alt=" ">
+        <p class="popup__view-title"> </p>
       </form>
     </div>
   </section>

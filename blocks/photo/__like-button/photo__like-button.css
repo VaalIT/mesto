@@ -10,7 +10,3 @@
     opacity: 60%;
     cursor: pointer;
 }
-
-.photo__like-button:active {
-    background-color: #000000;
-}
