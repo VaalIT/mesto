@@ -2,14 +2,13 @@ const editButton = document.querySelector('.profile__edit-button');
 const profileName = document.querySelector('.profile__name');
 const profileJob = document.querySelector('.profile__job');
 const popupProfile = document.querySelector('.popup_type_profile');
-const formElement = document.querySelector('form[name="profile"]');
+const profileForm = document.querySelector('form[name="profile"]');
 const popupProfileCloseButton = document.querySelector('button[name="close-profile"]');
 const nameInput = document.querySelector('.popup__input_type_name');
 const jobInput = document.querySelector('.popup__input_type_job');
-const popupProfileSaveButton = document.querySelector('button[name="save-profile"]');
 const addPhotoButton = document.querySelector('.profile__photo-add-button');
 const popupPhoto = document.querySelector('.popup_type_photo');
-const photo = document.querySelector('.photo');
+const photosSection = document.querySelector('.photo');
 const template = document.querySelector('.template');
 const popupPhotoCloseButton = document.querySelector('button[name="close-photo"]');
 const popupPhotoSaveButton = document.querySelector('button[name="save-photo"]');
@@ -47,34 +46,38 @@ const initialPhotoItems = [
     }
   ];
 
-function popupProfileClose() { 
-    popupProfile.classList.remove('popup_opened'); 
+function openPopup(popup) {
+    popup.classList.add('popup_opened');
+}
+
+function closePopup(popup) {
+    popup.classList.remove('popup_opened');
 }
 
 function popupProfileOpen() { 
-    popupProfile.classList.add('popup_opened');
+    openPopup(popupProfile);
     profileName.textContent = nameInput.value; 
     profileJob.textContent = jobInput.value;
 }
 
 editButton.addEventListener('click', popupProfileOpen);
 
-popupProfileCloseButton.addEventListener('click', popupProfileClose); 
-
 function formSubmitHandler(evt) {
     evt.preventDefault();
     profileName.textContent = nameInput.value;
     profileJob.textContent = jobInput.value;
-    popupProfileClose()
+    closePopup(popupProfile);
 }
 
-formElement.addEventListener('submit', formSubmitHandler);
+popupProfileCloseButton.addEventListener('click', () => closePopup(popupProfile)); 
+
+profileForm.addEventListener('submit', formSubmitHandler);
 
 function renderPhotoItems() {
     const photoHtml = initialPhotoItems.map (function (item) {
         return getItem(item);
     });
-    photo.append(...photoHtml);
+    photosSection.append(...photoHtml);
 }
 
 renderPhotoItems();
@@ -92,27 +95,20 @@ function getItem(item) {
 
     const likeButton = photoItem.querySelector('.photo__like-button');
     likeButton.addEventListener('click', function(evt) {
-        likeButton.classList.add('photo__like-button_active');
+        likeButton.classList.toggle('photo__like-button_active');
     }); 
 
     photoImage.addEventListener('click', function(evt) {
-        popupViewOpen();
+        openPopup(popupView);
 		popupViewPhoto.src = photoImage.src;
+        popupViewPhoto.alt = 'Фото ' + photoTitle.textContent + '.';
         popupViewTitle.textContent = photoTitle.textContent;
     });
 
     return photoItem;
 }
 
-function popupViewClose() { 
-    popupView.classList.remove('popup_opened'); 
-}
-
-popupViewCloseButton.addEventListener('click', popupViewClose); 
-
-function popupViewOpen() { 
-    popupView.classList.add('popup_opened');
-}
+popupViewCloseButton.addEventListener('click', () => closePopup(popupView));
 
 function deleteItem(evt) {
     const target = evt.target;
@@ -120,27 +116,19 @@ function deleteItem(evt) {
     lastItem.remove();
 }
 
-function popupPhotoOpen() {
-    popupPhoto.classList.add('popup_opened');
-}
+addPhotoButton.addEventListener('click', () => openPopup(popupPhoto));
 
-function popupPhotoClose() { 
-    popupPhoto.classList.remove('popup_opened'); 
-}
-
-addPhotoButton.addEventListener('click', popupPhotoOpen);
-
-popupPhotoCloseButton.addEventListener('click', popupPhotoClose); 
+popupPhotoCloseButton.addEventListener('click', () => closePopup(popupPhoto)); 
 
 function popupAddPhoto(evt) { 
     evt.preventDefault();
     const newPhotoTitle = titleInput.value; 
     const newPhotoLink = linkInput.value;
     const newItem = getItem({name: newPhotoTitle, link: newPhotoLink});
-    photo.prepend(newItem);
+    photosSection.prepend(newItem);
     titleInput.value = '';
     linkInput.value = '';
-    popupPhotoClose();
+    closePopup(popupPhoto);
 }
 
 formPhoto.addEventListener('submit', popupAddPhoto);
