@@ -19,6 +19,7 @@ const popupViewPhoto = document.querySelector('.popup__view-photo');
 const popupViewTitle = document.querySelector('.popup__view-title');
 const popupViewCloseButton = document.querySelector('button[name="close-view"]');
 const formPhoto = document.querySelector('form[name="photo"]');
+const popups = document.querySelectorAll('.popup');
 const initialPhotoItems = [
     {
       name: 'Архыз',
@@ -48,11 +49,31 @@ const initialPhotoItems = [
 
 function openPopup(popup) {
     popup.classList.add('popup_opened');
+    document.addEventListener('keydown', closePopupEsc);
 }
 
 function closePopup(popup) {
     popup.classList.remove('popup_opened');
+    document.removeEventListener('keydown', closePopupEsc);
 }
+
+function closePopupEsc(evt) {
+  if (evt.key === 'Escape') {
+    const popupOpened = document.querySelector('.popup_opened');
+    closePopup(popupOpened);
+  }
+}
+
+popups.forEach((popup) => {
+	popup.addEventListener('click', (evt) => {
+		if (evt.target.classList.contains('popup_opened')) {
+			closePopup(popup);
+		}
+		if (evt.target.classList.contains('popup__close-button')) {
+		  closePopup(popup);
+		}
+	})
+})
 
 function popupProfileOpen() { 
     openPopup(popupProfile);
