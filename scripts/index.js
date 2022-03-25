@@ -1,3 +1,6 @@
+import FormValidator from './FormValidator.js';
+import Card from './Card.js';
+
 const editButton = document.querySelector('.profile__edit-button');
 const profileName = document.querySelector('.profile__name');
 const profileJob = document.querySelector('.profile__job');
@@ -98,45 +101,14 @@ function renderPhotoItems() {
 
 renderPhotoItems();
 
-function getItem(item) {
-    const photoItem = template.content.cloneNode(true);
-    const photoImage = photoItem.querySelector('.photo__image');
-    photoImage.src = item.link;
-    photoImage.alt = 'Фото ' + item.name + '.';
-    const photoTitle = photoItem.querySelector('.photo__title');
-    photoTitle.textContent = item.name;
-
-    const deletePhotoButton = photoItem.querySelector('.photo__delete-button');
-    deletePhotoButton.addEventListener('click', deleteItem);
-
-    const likeButton = photoItem.querySelector('.photo__like-button');
-    likeButton.addEventListener('click', function(evt) {
-        likeButton.classList.toggle('photo__like-button_active');
-    }); 
-
-    photoImage.addEventListener('click', function(evt) {
-        openPopup(popupView);
-		popupViewPhoto.src = photoImage.src;
-        popupViewPhoto.alt = 'Фото ' + photoTitle.textContent + '.';
-        popupViewTitle.textContent = photoTitle.textContent;
-    });
-
-    return photoItem;
-}
-
-function deleteItem(evt) {
-    const target = evt.target;
-    const lastItem = target.closest('.photo__item');
-    lastItem.remove();
-}
-
 addPhotoButton.addEventListener('click', () => openPopup(popupPhoto));
 
 function handleAddPhotoForm(evt) { 
     evt.preventDefault();
-    const newPhotoTitle = titleInput.value; 
-    const newPhotoLink = linkInput.value;
-    const newItem = getItem({name: newPhotoTitle, link: newPhotoLink});
+    const newPhoto = {};
+    newPhoto.name = titleInput.value; 
+    newPhoto.link = linkInput.value;
+    const newItem = getItem({name: newPhoto.name, link: newPhoto.link});
     photosSection.prepend(newItem);
     titleInput.value = '';
     linkInput.value = '';
@@ -146,3 +118,4 @@ function handleAddPhotoForm(evt) {
 }
 
 formPhoto.addEventListener('submit', handleAddPhotoForm);
+
