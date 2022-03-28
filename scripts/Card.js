@@ -2,11 +2,16 @@ class Card {
   constructor(newPhoto, templateSelector) {
     this._name = newPhoto.name;
 		this._link = newPhoto.link;
-    this._template = document.querySelector(templateSelector).content;
+    this._templateSelector = templateSelector;
   }
 
   _getTemplate() {
-    const cardItem = this._template.querySelector('.photo__item').cloneNode(true);
+    const cardItem = document
+      .querySelector(this._templateSelector)
+      .content
+      .querySelector('.photo__item')
+      .cloneNode(true);
+
     this._element = cardItem;
   }
 
@@ -26,7 +31,7 @@ class Card {
 
   _cardItemClick() {
     photoTitle.textContent = this._name;
-    photoImage.alt = this._name;
+    photoImage.alt = 'Фото ' + this._name + '.';
     photoImage.src = this._link;
     form.reset();
     openPopup(popup);

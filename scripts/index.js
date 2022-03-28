@@ -11,13 +11,9 @@ const jobInput = document.querySelector('.popup__input_type_job');
 const addPhotoButton = document.querySelector('.profile__photo-add-button');
 const popupPhoto = document.querySelector('.popup_type_photo');
 const photosSection = document.querySelector('.photo');
-const template = document.querySelector('.template');
 const popupPhotoSaveButton = document.querySelector('button[name="save-photo"]');
 const titleInput = document.querySelector('.popup__input_type_title');
 const linkInput = document.querySelector('.popup__input_type_link');
-const popupView = document.querySelector('.popup_type_view');
-const popupViewPhoto = document.querySelector('.popup__view-photo');
-const popupViewTitle = document.querySelector('.popup__view-title');
 const formPhoto = document.querySelector('form[name="photo"]');
 const popups = document.querySelectorAll('.popup');
 const initialPhotoItems = [
@@ -49,7 +45,7 @@ const initialPhotoItems = [
 
 
 function createCard(item) {
-  const card = new Card(item, '.template');
+  const card = new Card(item, '#template');
   return card.generateCard();
 }
 
@@ -98,14 +94,10 @@ function handleProfileFormSubmit(evt) {
 
 profileForm.addEventListener('submit', handleProfileFormSubmit);
 
-function renderPhotoItems() {
-    const photoHtml = initialPhotoItems.map (function (item) {
-        createCard(item);
-    });
-    photosSection.append(...photoHtml);
-}
-
-renderPhotoItems();
+initialPhotoItems.forEach((item) => {
+	const cardItem = createCard(item);
+	photosSection.append(cardItem);
+});
 
 addPhotoButton.addEventListener('click', () => openPopup(popupPhoto));
 
@@ -116,8 +108,6 @@ function handleAddPhotoForm(evt) {
     newPhoto.link = linkInput.value;
     const newCard = createCard({name: newPhoto.name, link: newPhoto.link});
     photosSection.prepend(newCard);
-    titleInput.value = '';
-    linkInput.value = '';
     popupPhotoSaveButton.classList.add('popup__save-button_disabled');
     popupPhotoSaveButton.disabled = true;
     closePopup(popupPhoto);
