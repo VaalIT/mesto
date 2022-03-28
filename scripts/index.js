@@ -47,6 +47,12 @@ const initialPhotoItems = [
     }
   ];
 
+
+function createCard(item) {
+  const card = new Card(item, '.template');
+  return card.generateCard();
+}
+
 function openPopup(popup) {
     popup.classList.add('popup_opened');
     document.addEventListener('keydown', closePopupEsc);
@@ -76,9 +82,9 @@ popups.forEach((popup) => {
 })
 
 function openProfilePopup() { 
-    openPopup(popupProfile);
     profileName.textContent = nameInput.value; 
     profileJob.textContent = jobInput.value;
+    openPopup(popupProfile);
 }
 
 editButton.addEventListener('click', openProfilePopup);
@@ -94,7 +100,7 @@ profileForm.addEventListener('submit', handleProfileFormSubmit);
 
 function renderPhotoItems() {
     const photoHtml = initialPhotoItems.map (function (item) {
-        return getItem(item);
+        createCard(item);
     });
     photosSection.append(...photoHtml);
 }
@@ -108,8 +114,8 @@ function handleAddPhotoForm(evt) {
     const newPhoto = {};
     newPhoto.name = titleInput.value; 
     newPhoto.link = linkInput.value;
-    const newItem = getItem({name: newPhoto.name, link: newPhoto.link});
-    photosSection.prepend(newItem);
+    const newCard = createCard({name: newPhoto.name, link: newPhoto.link});
+    photosSection.prepend(newCard);
     titleInput.value = '';
     linkInput.value = '';
     popupPhotoSaveButton.classList.add('popup__save-button_disabled');
@@ -118,4 +124,3 @@ function handleAddPhotoForm(evt) {
 }
 
 formPhoto.addEventListener('submit', handleAddPhotoForm);
-
