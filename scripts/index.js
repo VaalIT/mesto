@@ -10,6 +10,7 @@ const nameInput = document.querySelector('.popup__input_type_name');
 const jobInput = document.querySelector('.popup__input_type_job');
 const addPhotoButton = document.querySelector('.profile__photo-add-button');
 const popupPhoto = document.querySelector('.popup_type_photo');
+const popupView = document.querySelector('.popup_type_view');
 const photosSection = document.querySelector('.photo');
 const popupPhotoSaveButton = document.querySelector('button[name="save-photo"]');
 const titleInput = document.querySelector('.popup__input_type_title');
@@ -114,3 +115,16 @@ function handleAddPhotoForm(evt) {
 }
 
 formPhoto.addEventListener('submit', handleAddPhotoForm);
+
+const addCardForm = popupPhoto.querySelector('.popup__form');
+const config = {
+  formSelector: '.popup__form',
+  inputSelector: '.popup__input',
+  submitButtonSelector: '.popup__save-button',
+  inactiveButtonClass: 'popup__save-button_disabled',
+  inputErrorClass: 'popup__input_type_error',
+  errorClass: 'popup__error_visible'};
+const addCardValidator = new FormValidator(config, addCardForm);
+addCardValidator.enableValidation();
+
+export { openPopup, popupView };

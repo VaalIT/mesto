@@ -1,3 +1,5 @@
+import { openPopup, popupView } from '../scripts/index.js';
+
 class Card {
   constructor(newPhoto, templateSelector) {
     this._name = newPhoto.name;
@@ -17,7 +19,8 @@ class Card {
 
   _setEventListeners() {
 		this._element.querySelector('.photo__delete-button').addEventListener('click', () => {
-			this._cardItemDelete();
+			this._element.remove();
+      this._element = null;
 		});
     
     this._element.querySelector('.photo__image').addEventListener('click', () => {
@@ -25,25 +28,18 @@ class Card {
 		});
 
     this._element.querySelector('.photo__like-button').addEventListener('click', () => {
-			this._cardItemLike();
+			this._element.querySelector('.photo__like-button').classList.toggle('photo__like-button_active');
 		});
 	}
 
+  
   _cardItemClick() {
-    photoTitle.textContent = this._name;
-    photoImage.alt = 'Фото ' + this._name + '.';
-    photoImage.src = this._link;
-    form.reset();
-    openPopup(popup);
-  }
-
-  __cardItemDelete() {
-    this._element.remove();
-    this._element = null;
-  }
-
-  _cardItemLike() {
-    this._element.querySelector('.photo__like-button').classList.toggle('photo__like-button_active');
+    const popupViewPhoto = document.querySelector('.popup__view-photo');
+    const popupViewTitle = document.querySelector('.popup__view-title');
+    popupViewTitle.textContent = this._name;
+    popupViewPhoto.alt = 'Фото ' + this._name + '.';
+    popupViewPhoto.src = this._link;
+    openPopup(popupView);
   }
 
   generateCard() {
