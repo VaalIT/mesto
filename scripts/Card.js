@@ -1,4 +1,4 @@
-import { openPopup, popupView } from '../scripts/index.js';
+import { openPopup, popupView, popupViewPhoto, popupViewTitle } from '../scripts/index.js';
 
 class Card {
   constructor(newPhoto, templateSelector) {
@@ -34,8 +34,6 @@ class Card {
 
   
   _cardItemClick() {
-    const popupViewPhoto = document.querySelector('.popup__view-photo');
-    const popupViewTitle = document.querySelector('.popup__view-title');
     popupViewTitle.textContent = this._name;
     popupViewPhoto.alt = 'Фото ' + this._name + '.';
     popupViewPhoto.src = this._link;
@@ -46,9 +44,11 @@ class Card {
     this._getTemplate();
     this._setEventListeners();
 
-    this._element.querySelector('.photo__image').src = this._link;
-    this._element.querySelector('.photo__image').alt = 'Фото ' + this._name + '.';
-    this._element.querySelector('.photo__title').textContent = this._name;
+    const photoImage = this._element.querySelector('.photo__image');
+
+    photoImage.src = this._link;
+	  photoImage.alt = 'Фото ' + this._name + '.';
+	  this._element.querySelector('.photo__title').textContent = this._name;
 
     return this._element;
   }

@@ -17,6 +17,8 @@ const titleInput = document.querySelector('.popup__input_type_title');
 const linkInput = document.querySelector('.popup__input_type_link');
 const formPhoto = document.querySelector('form[name="photo"]');
 const popups = document.querySelectorAll('.popup');
+const popupViewPhoto = document.querySelector('.popup__view-photo');
+const popupViewTitle = document.querySelector('.popup__view-title');
 const initialPhotoItems = [
     {
       name: 'Архыз',
@@ -116,7 +118,6 @@ function handleAddPhotoForm(evt) {
 
 formPhoto.addEventListener('submit', handleAddPhotoForm);
 
-const addCardForm = popupPhoto.querySelector('.popup__form');
 const config = {
   formSelector: '.popup__form',
   inputSelector: '.popup__input',
@@ -124,7 +125,13 @@ const config = {
   inactiveButtonClass: 'popup__save-button_disabled',
   inputErrorClass: 'popup__input_type_error',
   errorClass: 'popup__error_visible'};
+
+const addCardForm = popupPhoto.querySelector('.popup__form');
 const addCardValidator = new FormValidator(config, addCardForm);
 addCardValidator.enableValidation();
 
-export { openPopup, popupView };
+const editProfileForm = popupProfile.querySelector('.popup__form');
+const editProfileValidator = new FormValidator(config, editProfileForm);
+editProfileValidator.enableValidation();
+
+export { openPopup, popupView, popupViewPhoto, popupViewTitle };
