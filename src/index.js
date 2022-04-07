@@ -1,7 +1,7 @@
 import FormValidator from './FormValidator.js';
 import Card from './Card.js';
-import PopupWithForm from './PopupWithForm.js';
 
+const editButton = document.querySelector('.profile__edit-button');
 const profileName = document.querySelector('.profile__name');
 const profileJob = document.querySelector('.profile__job');
 const popupProfile = document.querySelector('.popup_type_profile');
@@ -10,11 +10,13 @@ const nameInput = document.querySelector('.popup__input_type_name');
 const jobInput = document.querySelector('.popup__input_type_job');
 const addPhotoButton = document.querySelector('.profile__photo-add-button');
 const popupPhoto = document.querySelector('.popup_type_photo');
+const popupView = document.querySelector('.popup_type_view');
 const photosSection = document.querySelector('.photo');
 const popupPhotoSaveButton = document.querySelector('button[name="save-photo"]');
 const titleInput = document.querySelector('.popup__input_type_title');
 const linkInput = document.querySelector('.popup__input_type_link');
 const formPhoto = document.querySelector('form[name="photo"]');
+const popups = document.querySelectorAll('.popup');
 const popupViewPhoto = document.querySelector('.popup__view-photo');
 const popupViewTitle = document.querySelector('.popup__view-title');
 const initialPhotoItems = [
@@ -50,6 +52,14 @@ function createCard(item) {
   return card.generateCard();
 }
 
+function openProfilePopup() { 
+    profileName.textContent = nameInput.value; 
+    profileJob.textContent = jobInput.value;
+    openPopup(popupProfile);
+}
+
+editButton.addEventListener('click', openProfilePopup);
+
 function handleProfileFormSubmit(evt) {
     evt.preventDefault();
     profileName.textContent = nameInput.value;
@@ -64,7 +74,7 @@ initialPhotoItems.forEach((item) => {
 	photosSection.append(cardItem);
 });
 
-addPhotoButton.addEventListener('click', () => PopupWithForm(popupPhoto));
+addPhotoButton.addEventListener('click', () => openPopup(popupPhoto));
 
 function handleAddPhotoForm(evt) { 
     evt.preventDefault();
@@ -96,4 +106,4 @@ const editProfileForm = popupProfile.querySelector('.popup__form');
 const editProfileValidator = new FormValidator(config, editProfileForm);
 editProfileValidator.enableValidation();
 
-export { popupViewPhoto, popupViewTitle };
+export { openPopup, popupView, popupViewPhoto, popupViewTitle };

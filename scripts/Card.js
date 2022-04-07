@@ -1,10 +1,11 @@
-import { openPopup, popupView, popupViewPhoto, popupViewTitle } from '../scripts/index.js';
+import { popupViewPhoto, popupViewTitle } from '../scripts/index.js';
 
 class Card {
-  constructor(newPhoto, templateSelector) {
+  constructor(newPhoto, templateSelector, handleCardClick) {
     this._name = newPhoto.name;
 		this._link = newPhoto.link;
     this._templateSelector = templateSelector;
+    this._handleCardClick = handleCardClick;
   }
 
   _getTemplate() {
@@ -37,7 +38,7 @@ class Card {
     popupViewTitle.textContent = this._name;
     popupViewPhoto.alt = 'Фото ' + this._name + '.';
     popupViewPhoto.src = this._link;
-    openPopup(popupView);
+    this._handleCardClick;
   }
 
   generateCard() {
