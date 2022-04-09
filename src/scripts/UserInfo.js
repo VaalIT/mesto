@@ -1,7 +1,7 @@
 class UserInfo {
-    constructor({ profileNameSelector, profileJobSelector }) {
-        this._nameInput = profileNameSelector;
-        this._jobInput = profileJobSelector;
+    constructor({ profileName, profileJob }) {
+        this._nameInput = profileName;
+        this._jobInput = profileJob;
     }
 
     getUserInfo() {
@@ -13,8 +13,8 @@ class UserInfo {
     }
 
     setUserInfo(profileName, profileJob) {
-        this._nameInput.textContent = profileName;
-        this._jobInput.textContent = profileJob;
+        this._nameInput.textContent = newProfileName;
+        this._jobInput.textContent = newProfileJob;
     }
 }
 

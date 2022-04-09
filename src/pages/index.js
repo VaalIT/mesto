@@ -53,7 +53,8 @@ const createCard = (item) => {
     popupSelector: '.template',
     handleCardClick: () => popupWithImage.open(item)
   });
-  return card.generateCard();
+  const starterCards = card.generate();
+	return starterCards;
 }
 
 const section = new Section({
@@ -65,6 +66,11 @@ const section = new Section({
   
 section.renderItems();
 
+const userInfo = new UserInfo({
+	name: profileName,
+	job: profileJob
+})
+
 const handlePhotoFormSubmit = (data) => {
 	section.addItem(createCard({
 		name: data.name,
@@ -73,24 +79,30 @@ const handlePhotoFormSubmit = (data) => {
 	popupWithPhotoForm.close();
 }
 
-const userInfo = new UserInfo({
-	name: profileName,
-	job: profileJob
-})
-
 const handleProfileFormSubmit = (data) => {
-  popupWithProfileForm.open();
 	const { name, job } = data;
 	userInfo.setUserInfo(name, job);
 	popupWithProfileForm.close();
-}
+};
 
 const popupWithImage = new PopupWithImage('.popup_type_view');
-const popupWithProfileForm = new PopupWithForm('.popup_type_profile');
-const popupWithPhotoForm = new PopupWithForm('.popup_type_photo');
+const popupWithProfileForm = new PopupWithForm('.popup_type_profile', handleProfileFormSubmit);
+const popupWithPhotoForm = new PopupWithForm('.popup_type_photo', handlePhotoFormSubmit);
 
-editButton.addEventListener('click', handleProfileFormSubmit);
-addPhotoButton.addEventListener('click', handlePhotoFormSubmit);
+editButton.addEventListener('click', () => {
+	const { name, job } = userInfo.getUserInfo()
+	nameInput.value = name
+	jobInput.value = job
+	editProfileValidator.activateButton();
+	editProfileValidator.resetErrors();
+	popupWithProfileForm.open();
+})
+
+addPhotoButton.addEventListener('click', () => {
+	addCardValidator.resetErrors();
+	popupWithPhotoForm.open();
+	addCardValidator.deactivateButton();
+})
 
 const config = {
   formSelector: '.popup__form',
