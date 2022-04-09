@@ -50,10 +50,10 @@ const initialPhotoItems = [
 const createCard = (item) => {
   const card = new Card({
     data: item,
-    popupSelector: '.template',
+    tepmplateSelector: '.template',
     handleCardClick: () => popupWithImage.open(item)
   });
-  const starterCards = card.generate();
+  const starterCards = card.generateCard();
 	return starterCards;
 }
 
