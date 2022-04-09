@@ -1,9 +1,10 @@
-import { popupViewPhoto, popupViewTitle } from '../scripts/index.js';
+import { popupViewPhoto, popupViewTitle } from '../pages/index.js';
 
 class Card {
-  constructor(newPhoto, templateSelector, handleCardClick) {
-    this._name = newPhoto.name;
-		this._link = newPhoto.link;
+  constructor({ data, templateSelector, handleCardClick }) {
+    this._name = data.name;
+		this._link = data.link;
+    this._alt = data.alt;
     this._templateSelector = templateSelector;
     this._handleCardClick = handleCardClick;
   }
@@ -15,7 +16,7 @@ class Card {
       .querySelector('.photo__item')
       .cloneNode(true);
 
-    this._element = cardItem;
+    return cardItem;
   }
 
   _setEventListeners() {
