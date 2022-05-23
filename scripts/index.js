@@ -46,11 +46,11 @@ const initialPhotoItems = [
 ];
 
 const createCard = (item) => {
-  const card = new Card({
-    data: item,
-    templateSelector: '.template',
-    handleCardClick: () => popupWithImage.open(item)
-  });
+  const card = new Card(
+    item,
+    '.template',
+    () => popupWithImage.open(item)
+  );
 
   return card.generateCard();
 };
@@ -73,7 +73,7 @@ const handlePhotoFormSubmit = (data) => {
   section.addItem(createCard({
     name: data.name,
     link: data.link
-  }))
+  }));
   popupWithPhotoForm.close();
 };
 
