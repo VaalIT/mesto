@@ -7,11 +7,11 @@ class PopupWithImage extends Popup {
         this._name = this._popup.querySelector('.popup__view-title');
       }
     
-      open({ link, alt, name }) {
-        this._image.src = link;
-        this._image.alt = alt;
-        this._name.textContent = name;
+      open({ link, name }) {
         super.open();
+        this._image.src = link;
+        this._image.alt = 'Фото ' + this._name + '.';
+        this._name.textContent = name;
       }
 }
 
