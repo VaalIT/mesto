@@ -23,33 +23,26 @@ class Card {
 		});
 
     this._element.querySelector('.photo__image').addEventListener('click', () => {
-			this._cardItemClick();
+			this._handleCardClick(this._link, this._name);
 		}); 
 
     this._element.querySelector('.photo__like-button').addEventListener('click', () => {
 			this._element.querySelector('.photo__like-button').classList.toggle('photo__like-button_active');
 		});
 	} 
-
-  _cardItemClick() {
-    const popupViewPhoto = document.querySelector('.popup__view-photo'); 
-    const popupViewTitle = document.querySelector('.popup__view-title'); 
-
-    popupViewTitle.textContent = this._name;
-    popupViewPhoto.alt = 'Фото ' + this._name + '.';
-    popupViewPhoto.src = this._link; 
-
-    this._handleCardClick;
+/*
+  _handleCardClick() {
+    this._element.querySelector('.popup__view-photo').src = this._link; 
+    this._element.querySelector('.popup__view-photo').alt = 'Фото ' + this._name + '.';
+    this._element.querySelector('.popup__view-title').textContent = this._name;
   } 
-
+*/
   generateCard() {
     this._getTemplate();
     this._setEventListeners(); 
 
-    const photoImage = this._element.querySelector('.photo__image');
-
-    photoImage.src = this._link;
-	  photoImage.alt = 'Фото ' + this._name + '.';
+    this._element.querySelector('.photo__image').src = this._link;
+	  this._element.querySelector('.photo__image').alt = 'Фото ' + this._name + '.';
 	  this._element.querySelector('.photo__title').textContent = this._name;
 
     return this._element;

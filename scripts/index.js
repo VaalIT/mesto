@@ -12,7 +12,7 @@ const popupProfile = document.querySelector('.popup_type_profile');
 const addPhotoButton = document.querySelector('.profile__photo-add-button'); 
 const popupPhoto = document.querySelector('.popup_type_photo'); 
 const photosSection = document.querySelector('.photo');
-const photoImage = document.querySelector('.photo__image');
+/*const photoImage = document.querySelector('.photo__image');*/
 
 const initialPhotoItems = [
   {
@@ -50,7 +50,7 @@ const createCard = (item) => {
   const card = new Card(
     item,
     '.template',
-    () => popupWithImage.open(item)
+    (link, name) => { popupWithImage.open(link, name) }
   );
 
   return card.generateCard();
@@ -64,8 +64,8 @@ const section = new Section({
 );
     
 section.renderItems();
-  
-const popupWithImageView = new PopupWithImage('.popup_type_view');
+
+const popupWithImage = new PopupWithImage('.popup_type_view');
 const popupWithProfileForm = new PopupWithForm('.popup_type_profile');
 const popupWithPhotoForm = new PopupWithForm('.popup_type_photo');
 
@@ -85,14 +85,9 @@ const handleProfileFormSubmit = (data) => {
   popupWithProfileForm.close();
 };
 
-const handleCardClick = () => {
-  popupWithImageView.open();
-  popupWithImageView.close();
-};
-
 editButton.addEventListener('click', handleProfileFormSubmit);
 addPhotoButton.addEventListener('click', handlePhotoFormSubmit);
-photoImage.addEventListener('click', handleCardClick);
+popupWithImage.setEventListeners();
 
 const userInfo = new UserInfo({
   name: profileName,
