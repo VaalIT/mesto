@@ -8,11 +8,15 @@ import UserInfo from '../scripts/UserInfo.js';
 const editButton = document.querySelector('.profile__edit-button'); 
 const profileName = document.querySelector('.profile__name'); 
 const profileJob = document.querySelector('.profile__job'); 
+const nameInput = document.querySelector('.popup__input_type_name');
+const jobInput = document.querySelector('.popup__input_type_job');
+const titleInput = document.querySelector('.popup__input_type_title');
+const linkInput = document.querySelector('.popup__input_type_link');
 const popupProfile = document.querySelector('.popup_type_profile'); 
 const addPhotoButton = document.querySelector('.profile__photo-add-button'); 
 const popupPhoto = document.querySelector('.popup_type_photo'); 
 const photosSection = document.querySelector('.photo');
-/*const photoImage = document.querySelector('.photo__image');*/
+const profileForm = document.querySelector('form[name="profile"]'); 
 
 const initialPhotoItems = [
   {
@@ -71,28 +75,44 @@ const popupWithPhotoForm = new PopupWithForm('.popup_type_photo');
 
 const handlePhotoFormSubmit = (data) => {
   popupWithPhotoForm.open();
-  section.addItem(createCard({
+  const newPhoto = {
     name: data.name,
     link: data.link
-  }));
-  popupWithPhotoForm.close();
+}
+photosSection.addItem(createCard(newPhoto));
+/*popupWithFormCard.closePopup();
+  photosSection.addItem(createCard({
+    name: data.name,
+    link: data.link
+  }));*/
 };
 
-const handleProfileFormSubmit = (data) => {
-  popupWithProfileForm.open();
-  const { name, job } = data;
-  userInfo.setUserInfo(name, job);
-  popupWithProfileForm.close();
-};
-
-editButton.addEventListener('click', handleProfileFormSubmit);
-addPhotoButton.addEventListener('click', handlePhotoFormSubmit);
-popupWithImage.setEventListeners();
-
-const userInfo = new UserInfo({
+const userData = new UserInfo({
   name: profileName,
   job: profileJob
 });
+
+
+editButton.addEventListener('click', () => {
+  popupWithProfileForm.open();
+  const info = userData.getUserInfo();
+  nameInput.value = info.name;
+  jobInput.value = info.job;
+  
+});
+
+function handleProfileFormSubmit(data) {
+  userData.setUserInfo(data);
+  popupWithProfileForm.close();
+};
+
+profileForm.addEventListener('submit', handleProfileFormSubmit); 
+
+/*editButton.addEventListener('click', handleProfileFormSubmit);*/
+addPhotoButton.addEventListener('click', handlePhotoFormSubmit);
+popupWithImage.setEventListeners();
+
+
   
 const config = {
   formSelector: '.popup__form',
