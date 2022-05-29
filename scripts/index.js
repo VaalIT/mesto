@@ -16,7 +16,8 @@ const popupProfile = document.querySelector('.popup_type_profile');
 const addPhotoButton = document.querySelector('.profile__photo-add-button'); 
 const popupPhoto = document.querySelector('.popup_type_photo'); 
 const photosSection = document.querySelector('.photo');
-const profileForm = document.querySelector('form[name="profile"]'); 
+const profileForm = document.querySelector('form[name="profile"]');
+const photoForm = document.querySelector('form[name="photo"]'); 
 
 const initialPhotoItems = [
   {
@@ -73,18 +74,19 @@ const popupWithImage = new PopupWithImage('.popup_type_view');
 const popupWithProfileForm = new PopupWithForm('.popup_type_profile');
 const popupWithPhotoForm = new PopupWithForm('.popup_type_photo');
 
-const handlePhotoFormSubmit = (data) => {
+addPhotoButton.addEventListener('click', () => {
   popupWithPhotoForm.open();
-  const newPhoto = {
-    name: data.name,
-    link: data.link
-}
-photosSection.addItem(createCard(newPhoto));
-/*popupWithFormCard.closePopup();
-  photosSection.addItem(createCard({
-    name: data.name,
-    link: data.link
-  }));*/
+  const newPhoto = {};
+  newPhoto.name = titleInput.value;
+  newPhoto.link = linkInput.value;
+  const newCard = createCard({name: newPhoto.name, link: newPhoto.link});
+  photosSection.prepend(newCard);
+});
+
+function handlePhotoFormSubmit() {
+  titleInput.value = '';
+  linkInput.value = '';
+  popupWithPhotoForm.close();
 };
 
 const userData = new UserInfo({
@@ -92,28 +94,29 @@ const userData = new UserInfo({
   job: profileJob
 });
 
-
 editButton.addEventListener('click', () => {
   popupWithProfileForm.open();
-  const info = userData.getUserInfo();
-  nameInput.value = info.name;
-  jobInput.value = info.job;
-  
+  const data = userData.getUserInfo();
+  nameInput.value = data.name;
+  jobInput.value = data.job;
 });
 
-function handleProfileFormSubmit(data) {
-  userData.setUserInfo(data);
+function handleProfileFormSubmit() {
+  const info = { profileName: nameInput.value,
+  profileJob: jobInput.value };
+  userData.setUserInfo(info);
   popupWithProfileForm.close();
 };
 
 profileForm.addEventListener('submit', handleProfileFormSubmit); 
+photoForm.addEventListener('submit', handlePhotoFormSubmit); 
+/*editButton.addEventListener('click', handleProfileFormSubmit);*
+addPhotoButton.addEventListener('click', handlePhotoFormSubmit);*/
 
-/*editButton.addEventListener('click', handleProfileFormSubmit);*/
-addPhotoButton.addEventListener('click', handlePhotoFormSubmit);
 popupWithImage.setEventListeners();
+popupWithProfileForm.setEventListeners();
+popupWithPhotoForm.setEventListeners();
 
-
-  
 const config = {
   formSelector: '.popup__form',
   inputSelector: '.popup__input',
