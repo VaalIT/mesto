@@ -5,11 +5,11 @@ class UserInfo {
     }
 
     getUserInfo() {
-        const userInfo = {
+        const userData = {
             name: this._profileNameSelector.textContent,
             job: this._profileJobSelector.textContent,
         }
-        return userInfo;
+        return userData;
     }
 
     setUserInfo(data) {
