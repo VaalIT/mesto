@@ -30,13 +30,7 @@ class Card {
 			this._element.querySelector('.photo__like-button').classList.toggle('photo__like-button_active');
 		});
 	} 
-/*
-  _handleCardClick() {
-    this._element.querySelector('.popup__view-photo').src = this._link; 
-    this._element.querySelector('.popup__view-photo').alt = 'Фото ' + this._name + '.';
-    this._element.querySelector('.popup__view-title').textContent = this._name;
-  } 
-*/
+
   generateCard() {
     this._getTemplate();
     this._setEventListeners(); 

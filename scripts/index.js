@@ -16,8 +16,6 @@ const popupProfile = document.querySelector('.popup_type_profile');
 const addPhotoButton = document.querySelector('.profile__photo-add-button'); 
 const popupPhoto = document.querySelector('.popup_type_photo'); 
 const photosSection = document.querySelector('.photo');
-const profileForm = document.querySelector('form[name="profile"]');
-const photoForm = document.querySelector('form[name="photo"]'); 
 
 const initialPhotoItems = [
   {
@@ -71,21 +69,21 @@ const section = new Section({
 section.renderItems();
 
 const popupWithImage = new PopupWithImage('.popup_type_view');
-const popupWithProfileForm = new PopupWithForm('.popup_type_profile');
-const popupWithPhotoForm = new PopupWithForm('.popup_type_photo');
+const popupWithProfileForm = new PopupWithForm('.popup_type_profile', handleProfileFormSubmit);
+const popupWithPhotoForm = new PopupWithForm('.popup_type_photo', handlePhotoFormSubmit);
 
 addPhotoButton.addEventListener('click', () => {
+  titleInput.value = '';
+  linkInput.value = '';
   popupWithPhotoForm.open();
-  const newPhoto = {};
-  newPhoto.name = titleInput.value;
-  newPhoto.link = linkInput.value;
-  const newCard = createCard({name: newPhoto.name, link: newPhoto.link});
-  photosSection.prepend(newCard);
 });
 
 function handlePhotoFormSubmit() {
-  titleInput.value = '';
-  linkInput.value = '';
+  const newPhoto = createCard({
+    link: linkInput.value,
+    name: titleInput.value
+  });
+  photosSection.prepend(newPhoto);
   popupWithPhotoForm.close();
 };
 
@@ -107,11 +105,6 @@ function handleProfileFormSubmit() {
   userData.setUserInfo(info);
   popupWithProfileForm.close();
 };
-
-profileForm.addEventListener('submit', handleProfileFormSubmit); 
-photoForm.addEventListener('submit', handlePhotoFormSubmit); 
-/*editButton.addEventListener('click', handleProfileFormSubmit);*
-addPhotoButton.addEventListener('click', handlePhotoFormSubmit);*/
 
 popupWithImage.setEventListeners();
 popupWithProfileForm.setEventListeners();
