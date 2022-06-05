@@ -35,8 +35,9 @@ class Card {
     this._getTemplate();
     this._setEventListeners(); 
 
-    this._element.querySelector('.photo__image').src = this._link;
-	  this._element.querySelector('.photo__image').alt = 'Фото ' + this._name + '.';
+    const photoImage = this._element.querySelector('.photo__image');
+    photoImage.src = this._link;
+	  photoImage.alt = 'Фото ' + this._name + '.';
 	  this._element.querySelector('.photo__title').textContent = this._name;
 
     return this._element;
