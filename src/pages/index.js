@@ -48,6 +48,7 @@ buttonAddPhoto.addEventListener('click', () => {
   titleInput.value = '';
   linkInput.value = '';
   popupWithPhotoForm.open();
+  addCardValidator.restartValidation();
 });
 
 function handlePhotoFormSubmit(data) {
@@ -69,6 +70,7 @@ editButton.addEventListener('click', () => {
   nameInput.value = data.name;
   jobInput.value = data.job;
   popupWithProfileForm.open();
+  editProfileValidator.restartValidation();
 });
 
 function handleProfileFormSubmit(data) {
