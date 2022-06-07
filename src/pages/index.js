@@ -1,5 +1,6 @@
 import './index.css';
 
+import Api from '../scripts/Api.js';
 import FormValidator from '../scripts/FormValidator.js';
 import Card from '../scripts/Card.js';
 import PopupWithForm from '../scripts/PopupWithForm.js';
@@ -20,6 +21,14 @@ import { editButton,
   photosSection,
   initialPhotoItems
 } from '../constants/constants.js';
+
+const api = new Api({
+  baseUrl: 'https://mesto.nomoreparties.co/v1/cohort-42',
+  headers: {
+    authorization: '55e9d13b-b2e4-4190-948b-7d1e9efb302f',
+    'Content-Type': 'application/json'
+  }
+});
 
 const createCard = (item) => {
   const card = new Card(
