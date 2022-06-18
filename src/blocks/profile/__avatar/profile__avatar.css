@@ -1,8 +1,11 @@
 .profile__avatar {
+    /*background-image: url(https://pictures.s3.yandex.net/frontend-developer/common/ava.jpg);*/
     margin: 0 auto 22px;
     width: 120px;
     height: 120px;
     border-radius: 100%;
+    background-size: cover;
+    position: relative;
 }
 
 @media screen and (min-width: 1024px) {

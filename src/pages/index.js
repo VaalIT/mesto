@@ -10,16 +10,18 @@ import UserInfo from '../scripts/UserInfo.js';
 
 import { editButton,
   profileName,
-  profileJob,
+  profileAbout,
   nameInput,
-  jobInput,
+  aboutInput,
   titleInput,
   linkInput,
   popupProfile,
   buttonAddPhoto,
   popupPhoto,
   photosSection,
-  initialPhotoItems
+  initialPhotoItems,
+  profileAvatar,
+  likeNumber
 } from '../constants/constants.js';
 
 const api = new Api({
@@ -29,6 +31,59 @@ const api = new Api({
     'Content-Type': 'application/json'
   }
 });
+
+const userData = new UserInfo({
+  nameSelector: '.profile__name',
+  aboutSelector: '.profile__about',
+  avatarSelector: '.profile__avatar'
+});
+
+let userId;
+
+Promise.all([ api.getUserInfo(), api.getInitialCards()])
+  .then(([ data, cards ]) => {
+    userData.setUserInfo(data);
+    userData.setUserAvatar(data.avatar);
+    userId = data._id;
+    
+    cards.forEach(data => {
+      const card = {
+        likes: data.likes,
+        id: data._id,
+        name: data.name,
+        link: data.link
+      }
+      section.addItem(createCard(card));
+    })
+  })
+  .catch(err => {
+    console.log(err)
+  });
+
+editButton.addEventListener('click', () => {
+  const data = userData.getUserInfo();
+  nameInput.value = data.name;
+  aboutInput.value = data.about;
+  popupWithProfileForm.open();
+  editProfileValidator.restartValidation();
+});
+/*
+function handleProfileFormSubmit(data) {
+  userData.setUserInfo(data);
+  popupWithProfileForm.close();
+};*/
+
+function handleProfileFormSubmit(data) {
+  const {name, about} = data;
+  api.changeUserInfo(name, about)
+    .then(() => {
+      userData.setUserInfo(name, about);
+      popupWithProfileForm.close()
+    })
+    .catch(err => {
+      console.log(err)
+    })
+};
 
 const createCard = (item) => {
   const card = new Card(
@@ -69,23 +124,7 @@ function handlePhotoFormSubmit(data) {
   popupWithPhotoForm.close();
 };
 
-const userData = new UserInfo({
-  name: profileName,
-  job: profileJob
-});
 
-editButton.addEventListener('click', () => {
-  const data = userData.getUserInfo();
-  nameInput.value = data.name;
-  jobInput.value = data.job;
-  popupWithProfileForm.open();
-  editProfileValidator.restartValidation();
-});
-
-function handleProfileFormSubmit(data) {
-  userData.setUserInfo(data);
-  popupWithProfileForm.close();
-};
 
 popupWithImage.setEventListeners();
 popupWithProfileForm.setEventListeners();

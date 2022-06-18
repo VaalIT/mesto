@@ -12,13 +12,15 @@
   <main class="content">
     <section class="profile">
       <div class="profile__item">
-        <img class="profile__avatar" src="<%=require('./images/profile/profile-avatar.jpg')%>" alt="Фото Жак-Ив Кусто.">
+        <div class="profile__avatar">
+          <button class="profile__avatar-edit-button"></button>
+        </div>
         <div class="profile__description">
           <div class="profile__heading">
-            <h1 class="profile__name">Жак-Ив Кусто</h1>
+            <h1 class="profile__name"> </h1>
             <button class="profile__edit-button" type="button"></button>
           </div>
-          <p class="profile__job">Исследователь океана</p>
+          <p class="profile__about"> </p>
         </div>
       </div>
       <button class="profile__photo-add-button" type="button"></button>
@@ -30,7 +32,10 @@
           <img class="photo__image" src=" " alt=" ">
           <div class="photo__caption">
             <h2 class="photo__title"> </h2>
-            <button class="photo__like-button" type="button"></button>
+            <div class="photo__like">
+              <button class="photo__like-button" type="button"></button>
+              <p class="photo__like-number"> </p>
+            </div>
           </div>
         </div>
       </template>
@@ -46,8 +51,8 @@
       <form class="popup__form" name="profile" novalidate>
         <input class="popup__input popup__input_type_name" id="name" name="profileName" type="text" value="Жак-Ив Кусто" required minlength="2" maxlength="40">
         <span class="popup__error" id="name-error"></span>
-        <input class="popup__input popup__input_type_job" id="job" name="profileJob" type="text" value="Исследователь океана" required minlength="2" maxlength="200">
-        <span class="popup__error" id="job-error"></span>
+        <input class="popup__input popup__input_type_about" id="about" name="profileAbout" type="text" value="Исследователь океана" required minlength="2" maxlength="200">
+        <span class="popup__error" id="about-error"></span>
         <button class="popup__save-button" name="save-profile" type="submit">Сохранить</button>
       </form>
     </div>
@@ -71,6 +76,26 @@
       <form class="popup__form-view" name="view">
         <img class="popup__view-photo" src=" " alt=" ">
         <p class="popup__view-title"> </p>
+      </form>
+    </div>
+  </section>
+  <section class="popup popup_type_delete">
+    <div class="popup__container">
+      <button class="popup__close-button" name="close-delete" type="button"></button>
+      <h2 class="popup__title">Вы уверены?</h2>
+      <form class="popup__form" name="delete" novalidate>
+        <button class="popup__save-button popup__save-button_disabled" name="delete-photo" type="submit" disabled>Да</button>
+      </form>
+    </div>
+  </section>
+  <section class="popup popup_type_avatar">
+    <div class="popup__container">
+      <button class="popup__close-button" name="close-avatar" type="button"></button>
+      <h2 class="popup__title">Обновить аватар</h2>
+      <form class="popup__form" name="avatar" novalidate>
+        <input class="popup__input popup__input_type_link" id="url" name="avatarLink" type="url" placeholder="Ссылка на фото" required minlength="8">
+        <span class="popup__error" id="url-error"></span>
+        <button class="popup__save-button popup__save-button_disabled" name="save-avatar" type="submit" disabled>Сохранить</button>
       </form>
     </div>
   </section>

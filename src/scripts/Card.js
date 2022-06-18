@@ -2,6 +2,9 @@ class Card {
   constructor(data, templateSelector, handleCardClick) {
     this._name = data.name;
 		this._link = data.link;
+    this._likes = data.likes;
+    this._id = data.id;
+    this._userId = data.userId;
     this._templateSelector = templateSelector;
     this._handleCardClick = handleCardClick;
   }
@@ -29,7 +32,32 @@ class Card {
     this._element.querySelector('.photo__like-button').addEventListener('click', () => {
 			this._element.querySelector('.photo__like-button').classList.toggle('photo__like-button_active');
 		});
-	} 
+	}
+
+  isLiked() {
+    this._userLikes = this._likes.find(user => user._id === this._userId);
+
+    return this._userLikes;
+  }
+
+  setLikes(likes) {
+    this._likes = likes
+    this._likeNumber.textContent = this._likes.length;
+
+    if (this.isLiked()) {
+      this._activateLike()
+    } else {
+      this._eraseLikeIcon()
+    }
+  }
+
+  _activateLike = () => {
+    this._element.querySelector('.photo__like-button').classList.add('photo__like-button_active');
+}
+
+  _disactiveLike = () => {
+    this._element.querySelector('.photo__like-button').classList.remove('photo__like-button_active');
+}
 
   generateCard() {
     this._getTemplate();

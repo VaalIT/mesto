@@ -1,14 +1,16 @@
 export const editButton = document.querySelector('.profile__edit-button'); 
 export const profileName = document.querySelector('.profile__name'); 
-export const profileJob = document.querySelector('.profile__job'); 
+export const profileAbout = document.querySelector('.profile__about'); 
 export const nameInput = document.querySelector('.popup__input_type_name');
-export const jobInput = document.querySelector('.popup__input_type_job');
+export const aboutInput = document.querySelector('.popup__input_type_about');
 export const titleInput = document.querySelector('.popup__input_type_title');
 export const linkInput = document.querySelector('.popup__input_type_link');
 export const popupProfile = document.querySelector('.popup_type_profile'); 
 export const buttonAddPhoto = document.querySelector('.profile__photo-add-button'); 
 export const popupPhoto = document.querySelector('.popup_type_photo'); 
 export const photosSection = document.querySelector('.photo');
+export const profileAvatar = document.querySelector('.profile__avatar');
+export const likeNumber = document.querySelector('.photo__like-number');
 
 export const initialPhotoItems = [
   {
