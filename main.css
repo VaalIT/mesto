@@ -6,12 +6,13 @@
 .content{margin:auto;position:relative;width:282px}@media screen and (min-width:768px){.content{width:581px}}@media screen and (min-width:1024px){.content{width:880px}}
 .profile{display:flex;flex-direction:column;margin:0 auto 36px;max-width:282px;overflow:hidden;text-overflow:ellipsis;white-space:nowrap}@media screen and (min-width:1024px){.profile{align-items:center;flex-direction:row;justify-content:space-between;margin:0 auto 51px;max-width:880px}}
 .profile__item{align-items:center;display:flex;flex-direction:column;max-width:282px;overflow:hidden;text-overflow:ellipsis;white-space:nowrap}@media screen and (min-width:1024px){.profile__item{flex-direction:row;max-width:486px}}
-.profile__avatar{border-radius:100%;height:120px;margin:0 auto 22px;width:120px}@media screen and (min-width:1024px){.profile__avatar{margin:0 30px 0 0}}
+.profile__avatar{background-size:cover;border-radius:100%;height:120px;margin:0 auto 22px;position:relative;width:120px}@media screen and (min-width:1024px){.profile__avatar{margin:0 30px 0 0}}
+.profile__avatar-edit-button{background-color:transparent;background-image:url(a086f758840ae814ecde.svg);background-repeat:no-repeat;border:none;cursor:pointer;height:26px;opacity:0;padding:0;visibility:hidden;width:26px}
 .profile__description{display:flex;flex-direction:column;margin:0 auto 36px;max-width:282px;overflow:hidden;text-overflow:ellipsis;white-space:nowrap}@media screen and (min-width:1024px){.profile__description{margin:0;max-width:336px}}
 .profile__heading{margin:0 auto 14px;position:relative;width:189px}@media screen and (min-width:1024px){.profile__heading{margin:0 auto 16px;width:336px}}
 .profile__name{font-size:27px;font-weight:500;line-height:1.2;margin:0;overflow:hidden;text-align:center;text-overflow:ellipsis;white-space:nowrap}@media screen and (min-width:1024px){.profile__name{font-size:42px;max-width:294px}}
 .profile__edit-button{background:#000 url(2f7be95ab48bbff7d88c.svg) 50% no-repeat;border:0;height:18px;left:199px;position:absolute;top:8px;width:18px}.profile__edit-button:hover{cursor:pointer;opacity:60%}@media screen and (min-width:1024px){.profile__edit-button{background-size:contain;height:24px;left:312px;top:15px;width:24px}}
-.profile__job{font-size:14px;line-height:1.2;margin:0 auto;overflow:hidden;text-align:center;text-overflow:ellipsis;white-space:nowrap;width:282px}@media screen and (min-width:1024px){.profile__job{font-size:18px;margin:0;text-align:left;width:336px}}
+.profile__about{font-size:14px;line-height:1.2;margin:0 auto;overflow:hidden;text-align:center;text-overflow:ellipsis;white-space:nowrap;width:282px}@media screen and (min-width:1024px){.profile__about{font-size:18px;margin:0;text-align:left;width:336px}}
 .profile__photo-add-button{background:#000 url(d86bb2edc2f6eadb96b7.svg) 50% no-repeat;background-size:16px 16px;border:2px solid #fff;height:50px;margin:0 auto;width:282px}.profile__photo-add-button:hover{cursor:pointer;opacity:60%}@media screen and (min-width:1024px){.profile__photo-add-button{background-size:22px 22px;margin:0;width:150px}}
 .photo{margin:0 auto 48px;min-height:50vh}@media screen and (min-width:768px){.photo{display:grid;gap:20px 17px;grid-template-columns:repeat(2,1fr);grid-template-rows:repeat(3,1fr);margin:0 auto 67px}}@media screen and (min-width:1024px){.photo{grid-template-columns:repeat(3,1fr);grid-template-rows:repeat(2,1fr)}}
 .photo__item{background:#fff;border-radius:10px;margin:0 auto 20px;min-height:361px;position:relative}.photo__item:last-of-type{margin-bottom:0}@media screen and (min-width:768px){.photo__item{margin:0}}
@@ -19,6 +20,8 @@
 .photo__delete-button{background:hsla(0,0%,100%,0) url(cbc09a894bdd4c956365.svg) 50% no-repeat;border:0;height:19px;position:absolute;right:20px;top:20px;transition:all 1s linear 0s;width:18px}.photo__delete-button:hover{cursor:pointer;opacity:60%}
 .photo__caption{align-items:center;display:flex;justify-content:space-between;margin:auto;width:246px}
 .photo__title{color:#000;font-size:24px;font-weight:900;line-height:1.2;max-width:224px;overflow:hidden;text-overflow:ellipsis;white-space:nowrap}
+.photo__like{align-items:center;display:flex;flex-direction:column}
+.photo__like-number{font-size:13px;font-weight:400;line-height:1.23;text-align:center}
 .photo__like-button{background:#fff url(87ed371465c7a6a1cd01.svg) 50% no-repeat;border:0;height:19px;transition:all 1s linear 0s;width:22px}.photo__like-button:hover{cursor:pointer;opacity:60%}
 .photo__like-button_active{background-image:url(e787eeb70bb65b7b453a.svg)}
 .footer{margin:0 auto 36px;width:282px}@media screen and (min-width:768px){.footer{width:581px}}@media screen and (min-width:1024px){.footer{margin:0 0 60px;width:100%}}
