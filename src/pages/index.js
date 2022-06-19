@@ -67,11 +67,6 @@ editButton.addEventListener('click', () => {
   popupWithProfileForm.open();
   editProfileValidator.restartValidation();
 });
-/*
-function handleProfileFormSubmit(data) {
-  userData.setUserInfo(data);
-  popupWithProfileForm.close();
-};*/
 
 function handleProfileFormSubmit(data) {
   const {name, about} = data;
@@ -85,16 +80,24 @@ function handleProfileFormSubmit(data) {
     })
 };
 
-const createCard = (item) => {
+const createCard = (data) => {
   const card = new Card(
-    item,
+    data,
     '.template',
-    (link, name) => { popupWithImage.open(link, name) }
+    (link, name) => {
+      popupWithImage.open(link, name)
+    },
+    (id) => {
+      handleDeleteSubmit(id, card)
+    },
+    (id) => {
+      handleLikeSubmit(id, card)
+    },
   );
 
   return card.generateCard();
 };
-  
+
 const section = new Section({
   items: initialPhotoItems,
   renderer: createCard,
@@ -107,6 +110,7 @@ section.renderItems();
 const popupWithImage = new PopupWithImage('.popup_type_view');
 const popupWithProfileForm = new PopupWithForm('.popup_type_profile', handleProfileFormSubmit);
 const popupWithPhotoForm = new PopupWithForm('.popup_type_photo', handlePhotoFormSubmit);
+const popupDeletePhoto = new PopupWithForm('.popup_type_delete');
 
 buttonAddPhoto.addEventListener('click', () => {
   titleInput.value = '';
@@ -116,16 +120,45 @@ buttonAddPhoto.addEventListener('click', () => {
 });
 
 function handlePhotoFormSubmit(data) {
-  const newPhoto = createCard({
+  api.addCard(data)
+    .then(res => {
+      const newPhoto = createCard({
+        name: res.name,
+        link: res.link,
+        likes: res.likes,
+        id: res._id,
+        userId: userId,
+        ownerId: res.owner._id
+      })
+      photosSection.prepend(newPhoto);
+      popupWithPhotoForm.close();
+    })
+    .catch(err => {
+      console.log(err)
+    })
+}
+
+/*const newPhoto = createCard({
     name: data.photoName,
     link: data.photoLink,
 });
   photosSection.prepend(newPhoto);
-  popupWithPhotoForm.close();
-};
+  popupWithPhotoForm.close();*/
 
-
-
+function handleDeleteSubmit(id, card) {
+  popupDeletePhoto.open();
+  popupDeletePhoto.changeSubmitHandler(() => {
+    api.deleteCard(id)
+      .then(res => {
+        card.deleteCard();
+        popupDeletePhoto.close();
+      })
+      .catch(err => {
+        console.log(err)
+      })
+  });
+}
+  
 popupWithImage.setEventListeners();
 popupWithProfileForm.setEventListeners();
 popupWithPhotoForm.setEventListeners();

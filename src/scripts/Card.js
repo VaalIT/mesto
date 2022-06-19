@@ -4,7 +4,8 @@ class Card {
 		this._link = data.link;
     this._likes = data.likes;
     this._id = data.id;
-    this._userId = data.userId;
+    this._myId = data.myId;
+    this._ownerId = data.ownerId;
     this._templateSelector = templateSelector;
     this._handleCardClick = handleCardClick;
   }
@@ -16,13 +17,17 @@ class Card {
       .querySelector('.photo__item')
       .cloneNode(true); 
 
-    this._element = cardItem;
-  } 
-
+    return cardItem;
+  }
+  
+  deleteCard = () => {
+    this._element.remove();
+    this._element = null;
+  }
+  
   _setEventListeners() {
 		this._element.querySelector('.photo__delete-button').addEventListener('click', () => {
-			this._element.remove();
-      this._element = null;
+			this._handleDeleteSubmit(this._id);
 		});
 
     this._element.querySelector('.photo__image').addEventListener('click', () => {
@@ -47,7 +52,7 @@ class Card {
     if (this.isLiked()) {
       this._activateLike()
     } else {
-      this._eraseLikeIcon()
+      this._disactiveLike()
     }
   }
 
@@ -60,14 +65,19 @@ class Card {
 }
 
   generateCard() {
-    this._getTemplate();
+    this._element = this._getTemplate();
     this._setEventListeners(); 
 
     const photoImage = this._element.querySelector('.photo__image');
     photoImage.src = this._link;
 	  photoImage.alt = 'Фото ' + this._name + '.';
 	  this._element.querySelector('.photo__title').textContent = this._name;
-
+/*
+    this._photoTitle = this._element.querySelector('.photo__title');
+    this._photoImage = this._element.querySelector('.photo__image');
+    this._photoLikeButton = this._element.querySelector('.photo__like-button');
+    this._photoLikeNumber = this._element.querySelector('.photo__like-number');
+*/
     return this._element;
   }
 } 

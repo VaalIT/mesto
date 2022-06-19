@@ -50,14 +50,11 @@ class Api {
     .then(this._handleResponse)
   }
 
-  addCard(name, link) {
+  addCard(data) {
     return fetch(`${this._baseUrl}/cards`, {
       method: "POST",
       headers: this._headers,
-      body: JSON.stringify({
-        name,
-        link
-      })
+      body: JSON.stringify(data)
     })
     .then(this._handleResponse)
   }
@@ -85,14 +82,6 @@ class Api {
     })
     .then(this._handleResponse)
   }
-
-
-
-
-
-
+}
   
-    // другие методы работы с API
-  }
-  
-  export default Api;
+export default Api;
