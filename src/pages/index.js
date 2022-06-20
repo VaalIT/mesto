@@ -86,8 +86,8 @@ const createCard = (data) => {
   const card = new Card(
     data,
     '.template',
-    () => {
-      handleCardClick(data)
+    (name, link) => {
+      popupWithImage.open(name, link);
     },
     (id) => {
       handleDeleteSubmit(id, card);
@@ -138,13 +138,6 @@ function handlePhotoFormSubmit(data) {
     })
 }
 
-/*const newPhoto = createCard({
-    name: data.photoName,
-    link: data.photoLink,
-});
-  photosSection.prepend(newPhoto);
-  popupWithPhotoForm.close();*/
-
 function handleDeleteSubmit(id, card) {
   popupDeletePhoto.open();
   popupDeletePhoto.changeSubmitHandler(() => {
@@ -194,16 +187,6 @@ function handleEditAvatarSubmit(data) {
     .catch(err => {
       console.log(err)
     })
-}
-/*
-function openEditAvatar() {
-  editAvatarValidator.resetErrors()
-  editAvatarValidator.toggleButtonState()
-  popupEditAvatar.open()
-}
-*/
-function handleCardClick(data) {
-  popupWithImage.open(data.name, data.link);
 }
 
 popupWithImage.setEventListeners();
