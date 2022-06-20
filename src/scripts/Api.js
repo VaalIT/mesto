@@ -31,17 +31,16 @@ class Api {
     .then(this._handleResponse)
   }
 
-  editAvatar(avatar) {
+  editAvatar(data) {
     return fetch(`${this._baseUrl}/users/me/avatar`, {
       method: "PATCH",
       headers: this._headers,
       body: JSON.stringify({
-        avatar
+        avatar: data.url
       })
     })
     .then(this._handleResponse)
   }
-
 
   getInitialCards() {
     return fetch(`${this._baseUrl}/cards`, {

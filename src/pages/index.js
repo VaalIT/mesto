@@ -9,8 +9,6 @@ import Section from '../scripts/Section.js';
 import UserInfo from '../scripts/UserInfo.js';
 
 import { editButton,
-  profileName,
-  profileAbout,
   nameInput,
   aboutInput,
   titleInput,
@@ -21,7 +19,9 @@ import { editButton,
   photosSection,
   initialPhotoItems,
   profileAvatar,
-  likeNumber
+  popupAvatar,
+  editAvatarButton,
+  urlAvatarInput
 } from '../constants/constants.js';
 
 const api = new Api({
@@ -40,18 +40,20 @@ const userData = new UserInfo({
 
 let userId;
 
-Promise.all([ api.getUserInfo(), api.getInitialCards()])
-  .then(([ data, cards ]) => {
+Promise.all([api.getUserInfo(), api.getInitialCards()])
+  .then(([data, cards]) => {
     userData.setUserInfo(data);
     userData.setUserAvatar(data.avatar);
     userId = data._id;
     
     cards.forEach(data => {
       const card = {
+        name: data.name,
+        link: data.link,
         likes: data.likes,
         id: data._id,
-        name: data.name,
-        link: data.link
+        userId: userId,
+        ownerId: data.owner._id,
       }
       section.addItem(createCard(card));
     })
@@ -84,14 +86,14 @@ const createCard = (data) => {
   const card = new Card(
     data,
     '.template',
-    (link, name) => {
-      popupWithImage.open(link, name)
+    () => {
+      handleCardClick(data)
     },
     (id) => {
-      handleDeleteSubmit(id, card)
+      handleDeleteSubmit(id, card);
     },
     (id) => {
-      handleLikeSubmit(id, card)
+      handleLikeClick(id, card);
     },
   );
 
@@ -99,18 +101,16 @@ const createCard = (data) => {
 };
 
 const section = new Section({
-  items: initialPhotoItems,
   renderer: createCard,
   },
   '.photo'
 );
-    
-section.renderItems();
 
 const popupWithImage = new PopupWithImage('.popup_type_view');
 const popupWithProfileForm = new PopupWithForm('.popup_type_profile', handleProfileFormSubmit);
 const popupWithPhotoForm = new PopupWithForm('.popup_type_photo', handlePhotoFormSubmit);
 const popupDeletePhoto = new PopupWithForm('.popup_type_delete');
+const popupEditAvatar = new PopupWithForm('.popup_type_avatar', handleEditAvatarSubmit);
 
 buttonAddPhoto.addEventListener('click', () => {
   titleInput.value = '';
@@ -158,10 +158,59 @@ function handleDeleteSubmit(id, card) {
       })
   });
 }
-  
+
+function handleLikeClick(id, card) {
+  if (card.isLiked()) {
+    api.deleteLike(id)
+      .then(res => {
+        card.setLikes(res.likes)
+      })
+      .catch(err => {
+        console.log(err)
+      })
+  } else {
+    api.addLike(id)
+      .then(res => {
+        card.setLikes(res.likes)
+      })
+      .catch(err => {
+        console.log(err)
+      })
+  }
+}
+
+editAvatarButton.addEventListener('click', () => {
+  urlAvatarInput.value = '';
+  editAvatarValidator.restartValidation();
+  popupEditAvatar.open();
+});
+
+function handleEditAvatarSubmit(data) {
+  api.editAvatar(data)
+    .then(res => {
+      userData.setUserAvatar(res.avatar);
+      popupEditAvatar.close();
+    })
+    .catch(err => {
+      console.log(err)
+    })
+}
+/*
+function openEditAvatar() {
+  editAvatarValidator.resetErrors()
+  editAvatarValidator.toggleButtonState()
+  popupEditAvatar.open()
+}
+*/
+function handleCardClick(data) {
+  popupWithImage.open(data.name, data.link);
+}
+
 popupWithImage.setEventListeners();
 popupWithProfileForm.setEventListeners();
 popupWithPhotoForm.setEventListeners();
+popupDeletePhoto.setEventListeners();
+popupEditAvatar.setEventListeners();
 
 const config = {
   formSelector: '.popup__form',
@@ -179,3 +228,7 @@ addCardValidator.enableValidation();
 const editProfileForm = popupProfile.querySelector('.popup__form');
 const editProfileValidator = new FormValidator(config, editProfileForm);
 editProfileValidator.enableValidation();
+
+const editAvatarForm = popupAvatar.querySelector('.popup__form');
+const editAvatarValidator = new FormValidator(config, editAvatarForm);
+editAvatarValidator.enableValidation();

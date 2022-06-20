@@ -1,6 +1,4 @@
 export const editButton = document.querySelector('.profile__edit-button'); 
-export const profileName = document.querySelector('.profile__name'); 
-export const profileAbout = document.querySelector('.profile__about'); 
 export const nameInput = document.querySelector('.popup__input_type_name');
 export const aboutInput = document.querySelector('.popup__input_type_about');
 export const titleInput = document.querySelector('.popup__input_type_title');
@@ -10,7 +8,9 @@ export const buttonAddPhoto = document.querySelector('.profile__photo-add-button
 export const popupPhoto = document.querySelector('.popup_type_photo'); 
 export const photosSection = document.querySelector('.photo');
 export const profileAvatar = document.querySelector('.profile__avatar');
-export const likeNumber = document.querySelector('.photo__like-number');
+export const popupAvatar = document.querySelector('.popup_type_avatar');
+export const editAvatarButton = document.querySelector('.profile__avatar-edit-button');
+export const urlAvatarInput = document.querySelector('.popup__input_type_link[name="url"]');
 
 export const initialPhotoItems = [
   {

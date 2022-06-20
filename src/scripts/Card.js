@@ -1,13 +1,15 @@
 class Card { 
-  constructor(data, templateSelector, handleCardClick) {
+  constructor(data, templateSelector, handleCardClick, handleDeleteSubmit, handleLikeClick) {
     this._name = data.name;
 		this._link = data.link;
     this._likes = data.likes;
     this._id = data.id;
-    this._myId = data.myId;
+    this._userId = data.userId;
     this._ownerId = data.ownerId;
     this._templateSelector = templateSelector;
     this._handleCardClick = handleCardClick;
+    this._handleDeleteSubmit = handleDeleteSubmit;
+    this._handleLikeClick = handleLikeClick;
   }
 
   _getTemplate() { 
@@ -35,7 +37,7 @@ class Card {
 		}); 
 
     this._element.querySelector('.photo__like-button').addEventListener('click', () => {
-			this._element.querySelector('.photo__like-button').classList.toggle('photo__like-button_active');
+			this._handleLikeClick(this._id);
 		});
 	}
 
@@ -46,23 +48,15 @@ class Card {
   }
 
   setLikes(likes) {
-    this._likes = likes
-    this._likeNumber.textContent = this._likes.length;
+    this._likes = likes;
+    this._element.querySelector('.photo__like-number').textContent = this._likes.length;
 
     if (this.isLiked()) {
-      this._activateLike()
+      this._element.querySelector('.photo__like-button').classList.add('photo__like-button_active');
     } else {
-      this._disactiveLike()
+      this._element.querySelector('.photo__like-button').classList.remove('photo__like-button_active');
     }
   }
-
-  _activateLike = () => {
-    this._element.querySelector('.photo__like-button').classList.add('photo__like-button_active');
-}
-
-  _disactiveLike = () => {
-    this._element.querySelector('.photo__like-button').classList.remove('photo__like-button_active');
-}
 
   generateCard() {
     this._element = this._getTemplate();
@@ -72,12 +66,13 @@ class Card {
     photoImage.src = this._link;
 	  photoImage.alt = 'Фото ' + this._name + '.';
 	  this._element.querySelector('.photo__title').textContent = this._name;
-/*
-    this._photoTitle = this._element.querySelector('.photo__title');
-    this._photoImage = this._element.querySelector('.photo__image');
-    this._photoLikeButton = this._element.querySelector('.photo__like-button');
-    this._photoLikeNumber = this._element.querySelector('.photo__like-number');
-*/
+
+    this.setLikes(this._likes);
+
+    if (this._ownerId !== this._userId) {
+      this._element.querySelector('.photo__delete-button').style.display = 'none'
+  }
+
     return this._element;
   }
 } 
