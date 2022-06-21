@@ -2,7 +2,7 @@
     margin-top: -55px;
     position: relative;
     width: 282px;
-    min-height: 322px;
+    /*min-height: 322px;*/
     background: #FFFFFF;
     color: #000000;
     border-radius: 10px;
@@ -14,6 +14,6 @@
     .popup__container {
         margin-top: 10px;
         width: 430px;
-        min-height: 330px;
+        /*min-height: 330px;*/
     }
 }

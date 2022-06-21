@@ -11,7 +11,7 @@ export const profileAvatar = document.querySelector('.profile__avatar');
 export const popupAvatar = document.querySelector('.popup_type_avatar');
 export const editAvatarButton = document.querySelector('.profile__avatar-edit-button');
 export const urlAvatarInput = document.querySelector('.popup__input_type_link[name="url"]');
-
+/*
 export const initialPhotoItems = [
   {
     name: 'Архыз',
@@ -43,3 +43,4 @@ export const initialPhotoItems = [
     link: 'https://pictures.s3.yandex.net/frontend-developer/cards-compressed/baikal.jpg'
   }
 ];
+*/

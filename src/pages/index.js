@@ -1,12 +1,12 @@
 import './index.css';
 
-import Api from '../scripts/Api.js';
-import FormValidator from '../scripts/FormValidator.js';
-import Card from '../scripts/Card.js';
-import PopupWithForm from '../scripts/PopupWithForm.js';
-import PopupWithImage from '../scripts/PopupWithImage.js';
-import Section from '../scripts/Section.js';
-import UserInfo from '../scripts/UserInfo.js';
+import Api from '../components/Api.js';
+import FormValidator from '../components/FormValidator.js';
+import Card from '../components/Card.js';
+import PopupWithForm from '../components/PopupWithForm.js';
+import PopupWithImage from '../components/PopupWithImage.js';
+import Section from '../components/Section.js';
+import UserInfo from '../components/UserInfo.js';
 
 import { editButton,
   nameInput,
@@ -17,8 +17,6 @@ import { editButton,
   buttonAddPhoto,
   popupPhoto,
   photosSection,
-  initialPhotoItems,
-  profileAvatar,
   popupAvatar,
   editAvatarButton,
   urlAvatarInput
@@ -71,6 +69,7 @@ editButton.addEventListener('click', () => {
 });
 
 function handleProfileFormSubmit(data) {
+  popupWithProfileForm.renderLoading(true)
   const {name, about} = data;
   api.changeUserInfo(name, about)
     .then(() => {
@@ -79,6 +78,9 @@ function handleProfileFormSubmit(data) {
     })
     .catch(err => {
       console.log(err)
+    })
+    .finally(() => {
+      popupWithProfileForm.renderLoading(false)
     })
 };
 
@@ -120,6 +122,7 @@ buttonAddPhoto.addEventListener('click', () => {
 });
 
 function handlePhotoFormSubmit(data) {
+  popupWithPhotoForm.renderLoading(true)
   api.addCard(data)
     .then(res => {
       const newPhoto = createCard({
@@ -135,6 +138,9 @@ function handlePhotoFormSubmit(data) {
     })
     .catch(err => {
       console.log(err)
+    })
+    .finally(() => {
+      popupWithPhotoForm.renderLoading(false)
     })
 }
 
@@ -179,6 +185,7 @@ editAvatarButton.addEventListener('click', () => {
 });
 
 function handleEditAvatarSubmit(data) {
+  popupEditAvatar.renderLoading(true)
   api.editAvatar(data)
     .then(res => {
       userData.setUserAvatar(res.avatar);
@@ -186,6 +193,9 @@ function handleEditAvatarSubmit(data) {
     })
     .catch(err => {
       console.log(err)
+    })
+    .finally(() => {
+      popupEditAvatar.renderLoading(false)
     })
 }
 
