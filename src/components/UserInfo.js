@@ -6,11 +6,10 @@ class UserInfo {
     }
 
     getUserInfo() {
-        const userData = {
+        return {
             name: this._name.textContent,
             about: this._about.textContent,
         }
-        return userData;
     }
 
     setUserInfo(data) {

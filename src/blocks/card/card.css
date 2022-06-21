@@ -1,4 +1,4 @@
-.photo__item {
+.card {
     position: relative;
     margin: 0 auto 20px;
     min-height: 361px;
@@ -6,12 +6,12 @@
     border-radius: 10px;
 }
 
-.photo__item:last-of-type {
+.card:last-of-type {
     margin-bottom: 0;
 }
 
 @media screen and (min-width: 768px) {
-    .photo__item {
+    .card {
         margin: 0;
     }
 }

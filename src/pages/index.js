@@ -16,9 +16,8 @@ import { editButton,
   popupProfile,
   buttonAddPhoto,
   popupPhoto,
-  photosSection,
+  profileAvatar,
   popupAvatar,
-  editAvatarButton,
   urlAvatarInput
 } from '../constants/constants.js';
 
@@ -53,8 +52,9 @@ Promise.all([api.getUserInfo(), api.getInitialCards()])
         userId: userId,
         ownerId: data.owner._id,
       }
-      section.addItem(createCard(card));
     })
+
+    section.renderItems(cards);
   })
   .catch(err => {
     console.log(err)
@@ -73,7 +73,7 @@ function handleProfileFormSubmit(data) {
   const {name, about} = data;
   api.changeUserInfo(name, about)
     .then(() => {
-      userData.setUserInfo(name, about);
+      userData.setUserInfo({name, about});
       popupWithProfileForm.close()
     })
     .catch(err => {
@@ -103,8 +103,9 @@ const createCard = (data) => {
 };
 
 const section = new Section({
-  renderer: createCard,
-  },
+  renderer: (item) => {
+    section.addItem(createCard(item));
+  }},
   '.photo'
 );
 
@@ -133,7 +134,7 @@ function handlePhotoFormSubmit(data) {
         userId: userId,
         ownerId: res.owner._id
       })
-      photosSection.prepend(newPhoto);
+      section.addItem(newPhoto);
       popupWithPhotoForm.close();
     })
     .catch(err => {
@@ -178,7 +179,7 @@ function handleLikeClick(id, card) {
   }
 }
 
-editAvatarButton.addEventListener('click', () => {
+profileAvatar.addEventListener('click', () => {
   urlAvatarInput.value = '';
   editAvatarValidator.restartValidation();
   popupEditAvatar.open();
