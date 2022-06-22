@@ -50,8 +50,8 @@ Promise.all([api.getUserInfo(), api.getInitialCards()])
 
 editButton.addEventListener('click', () => {
   const { name, about } = userData.getUserInfo();
-  nameInput.value = data.name;
-  aboutInput.value = data.about;
+  nameInput.value = name;
+  aboutInput.value = about;
   popupWithProfileForm.open();
   editProfileValidator.restartValidation();
 });
