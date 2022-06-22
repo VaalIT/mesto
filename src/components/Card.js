@@ -5,7 +5,7 @@ class Card {
     this._likes = data.likes;
     this._id = data._id;
     this._userId = data.userId;
-    this._ownerId = data.owner.id;
+    this._ownerId = data.owner._id;
     this._templateSelector = templateSelector;
     this._handleCardClick = handleCardClick;
     this._handleDeleteSubmit = handleDeleteSubmit;

@@ -42,26 +42,14 @@ Promise.all([api.getUserInfo(), api.getInitialCards()])
     userData.setUserInfo(data);
     userData.setUserAvatar(data.avatar);
     userId = data._id;
-    
-    cards.forEach(data => {
-      const card = {
-        name: data.name,
-        link: data.link,
-        likes: data.likes,
-        id: data._id,
-        userId: userId,
-        ownerId: data.owner._id,
-      }
-    })
-
-    section.renderItems(cards);
+    section.renderItems(cards.reverse());
   })
   .catch(err => {
     console.log(err)
   });
 
 editButton.addEventListener('click', () => {
-  const data = userData.getUserInfo();
+  const { name, about } = userData.getUserInfo();
   nameInput.value = data.name;
   aboutInput.value = data.about;
   popupWithProfileForm.open();
@@ -86,7 +74,7 @@ function handleProfileFormSubmit(data) {
 
 const createCard = (data) => {
   const card = new Card(
-    data,
+    {...data, userId},
     '.template',
     (name, link) => {
       popupWithImage.open(name, link);
@@ -126,14 +114,7 @@ function handlePhotoFormSubmit(data) {
   popupWithPhotoForm.renderLoading(true)
   api.addCard(data)
     .then(res => {
-      const newPhoto = createCard({
-        name: res.name,
-        link: res.link,
-        likes: res.likes,
-        id: res._id,
-        userId: userId,
-        ownerId: res.owner._id
-      })
+      const newPhoto = createCard(res);
       section.addItem(newPhoto);
       popupWithPhotoForm.close();
     })

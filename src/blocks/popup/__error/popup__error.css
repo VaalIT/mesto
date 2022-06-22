@@ -7,3 +7,7 @@
     width: 100%;
     margin: 0 0 13px 0;
 }
+
+.popup__error:last-of-type {
+    margin-bottom: 31px;
+}
